@@ -4579,7 +4579,7 @@ public class SIsland implements Island {
             calculationResult = calculationAlgorithm.calculateIsland(this);
         }
 
-        calculationResult.whenComplete((result, error) -> {
+        calculationResult.whenCompleteAsync((result, error) -> {
             beingRecalculated = false;
             boolean isLastActiveTask = plugin.getGrid().stopCalcTask();
 
@@ -4611,7 +4611,7 @@ public class SIsland implements Island {
 
             saveBlockCounts(this.currentTotalBlockCounts.get(), oldWorth, oldLevel, true, isLastActiveTask);
             updateLastTime();
-        });
+        }, BukkitExecutor.SYNC_EXECUTOR);
     }
 
     private boolean hasGiveInterestFailed() {
